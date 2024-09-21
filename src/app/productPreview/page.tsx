@@ -12,27 +12,49 @@ import { useRouter } from "next/navigation";
 
 const ProductPreview = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [activeFilter, setActiveFilter] = useState<number>(1);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const router = useRouter();
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const comments = ['Quality goods','Nice designs', 'Quality goods', 'Nice designs','Quality goods','Nice designs']
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
+  };
+  // Original long text
+  const fullText =
+    "Wholesale and drop shipping are both welcomed. For wholesale, we will offer discount or free express shipping which only takes 3-7 days to arrive. For drop shipping, we could send the goods to your customers directly and won't leave information about us if you'd like to. How can track my parcel? You can track your parcel on the following website using your tracking number: www.17track.net/en (Copied to the browser to open). What can I do when purchase protection time is running out? If your purchase protection time is running out, please contact us and we can help you to extend it. So your money will not go to my account.";
+
+  // Specify how many characters to show before truncating
+  const maxLength = 150;
+
+  const comments = [
+    "Quality goods",
+    "Nice designs",
+    "Quality goods",
+    "Nice designs",
+    "Quality goods",
+    "Nice designs",
+  ];
 
   return (
-    <div className="pb-10">
+    <div className="pb-10 h-screen">
       <div className="px-4">
         <Header title="Product preview" verticalLine />
       </div>
       <div>
-        <Image
-          src={productImage}
-          alt="product image"
-          width={360}
-          height={360}
-          className="object-cover"
-        />
+        <div className="flex items-center justify-center w-full">
+          <Image
+            src={productImage}
+            alt="product image"
+            width={360}
+            height={360}
+            className="object-cover w-full "
+          />
+        </div>
+
         <div className="px-4 mt-4">
           <div className="flex">
             <p className="text-sm font-medium">
@@ -74,9 +96,17 @@ const ProductPreview = () => {
             <div className="text-[10px] font-medium text-gray-500">
               Size: SMALL
             </div>
-            <div className="flex justify-between">
+            <div className="flex gap-x-3">
               {Array.from({ length: 5 }).map((_, index) => (
-                <div key={index} className="bg-black py-1 px-4 rounded-[90px] text-white text-xs cursor-pointer mt-2 mb-4">
+                <div
+                  onClick={() => setActiveFilter(index + 1)}
+                  key={index}
+                  className={` flex-1 flex justify-center bg-black py-1 px-2 rounded-[90px] text-xs cursor-pointer mt-2 mb-4 ${
+                    activeFilter == index + 1
+                      ? "bg-black text-white"
+                      : "bg-gray-100 text-black"
+                  }`}
+                >
                   Filter
                 </div>
               ))}
@@ -86,9 +116,12 @@ const ProductPreview = () => {
             <div className="text-[10px] font-medium text-gray-500">
               Color: White
             </div>
-            <div className="flex justify-between">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <div key={index} className="bg-black py-1 px-4 rounded-[90px] text-white text-xs cursor-pointer mt-2 mb-4">
+            <div className="flex gap-x-3">
+              {Array.from({ length: 2 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-100 py-1 px-2 rounded-[90px] text-xs cursor-pointer mt-2 mb-4"
+                >
                   Filter
                 </div>
               ))}
@@ -102,19 +135,14 @@ const ProductPreview = () => {
         >
           <div className="text-xs">
             <p className="text-gray-600">
-              Wholesale and drop shipping are both welcomed. For wholesale,we
-              will offer discount or free express shipping which only takes 3-7
-              days to arrive. For drop shipping,we could send the goods to your
-              customers directly and won't leave information about us if you'd
-              like to. How can track my parcel? You can track your parcel on the
-              following website using your tracking number: www.17track.net/en 
-              (Copied to the browser to open) What can I do when
-              purchase protection time is running out? If your purchase
-              protection time is running out, please contact us and we can help
-              you to extend it. So your money will not go to my account. Read
-              more
+              {isExpanded ? fullText : `${fullText.substring(0, maxLength)}...`}
             </p>
-            <span className="text-primary cursor-pointer">Read More</span>
+            <span
+              className="text-primary cursor-pointer mt-2"
+              onClick={toggleReadMore}
+            >
+              {isExpanded ? "Read Less" : "Read More"}
+            </span>
           </div>
         </Accordion>
         <Accordion
@@ -135,7 +163,7 @@ const ProductPreview = () => {
                 <h4 className="text-xs text-gray-700">Gucci Store</h4>
                 <div className="flex items-center gap-x-1 text-gray-400">
                   <span className="text-xs">Fashion</span>
-                  <span className="w-1 h-1 bg-gray-300 rounded-full"/>
+                  <span className="w-1 h-1 bg-gray-300 rounded-full" />
                   <span className="flex items-center text-[10px]">
                     <RatingStar
                       iconWidth="1.5em"
@@ -144,7 +172,7 @@ const ProductPreview = () => {
                     />
                     5.4
                   </span>
-                  <span className="w-1 h-1 bg-gray-300 rounded-full"/>
+                  <span className="w-1 h-1 bg-gray-300 rounded-full" />
                   <span className="flex items-center text-[10px]">
                     <Image
                       src={profileIcon}
@@ -156,20 +184,29 @@ const ProductPreview = () => {
                   </span>
                 </div>
               </div>
-              <div className="text-primary text-xs font-medium  cursor-pointer">Follow</div>
+              <div className="text-primary text-xs font-medium  cursor-pointer">
+                Follow
+              </div>
             </div>
-            <p className="text-xs text-gray-600 mt-1">Vendor description: You can track your parcel on the following website using your tracking number: www.17track.net/en  (Copied to the browser to open)</p>
+            <p className="text-xs text-gray-600 mt-1">
+              Vendor description: You can track your parcel on the following
+              website using your tracking number: www.17track.net/en  (Copied to
+              the browser to open)
+            </p>
             <div className="grid grid-cols-3 gap-2 mt-4">
               {comments.map((comment, index) => (
-                <div key={index} className="bg-gray-100 py-1 px-2 rounded-[90px] text-black text-xs cursor-pointer ">
+                <div
+                  key={index}
+                  className="bg-gray-100 py-1 px-2 rounded-[90px] text-black text-xs cursor-pointer "
+                >
                   {comment}
                 </div>
               ))}
             </div>
           </div>
         </Accordion>
-        <div className="mt-5 px-4">
-          <CustomButton btnTitle="Publish" onClick={()=> router.push('/')} />
+        <div className="mt-4 px-4">
+          <CustomButton btnTitle="Publish" onClick={() => router.push("/")} />
         </div>
       </div>
     </div>

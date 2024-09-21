@@ -67,7 +67,7 @@ const ProductEdit: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 mb-4">
         <Accordion
           title="Basic Details"
           isOpen={openIndex === 0}
@@ -97,15 +97,15 @@ const ProductEdit: React.FC = () => {
               <div className="mt-4 ">
                 {selectedImages.map((image, index) => (
                   <div key={index} className="relative flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-x-2">
+                    <div className="flex items-center gap-x-2 w-3/5 ">
                       <img
                         src={URL.createObjectURL(image)}
                         alt={`Selected image ${index + 1}`}
                         className="w-[60px] h-[60px] rounded-lg object-cover"
                       />
-                      <p>{image.name}</p>
+                      <p className="text-sm">{image.name}</p>
                     </div>
-                    <div className="flex items-center gap-x-3">
+                    <div className="flex items-center gap-x-3  ">
                       <IoEllipsisHorizontalSharp  size={16} color="gray" />
                       <Switch
                       onChange={() => handleChange(index)}
@@ -181,7 +181,7 @@ const ProductEdit: React.FC = () => {
           </div>
         </Accordion>
       </div>
-      <div className="flex item-center gap-x-2 px-4">
+      <div className="flex item-center gap-x-2 px-4 ">
         <div className="flex-1">
           <CustomeButton
             shadow={false}
@@ -201,4 +201,4 @@ const ProductEdit: React.FC = () => {
 
 ProductEdit.displayName = "ProductEdit";
 
-export default withAuth(ProductEdit);
+export default (ProductEdit);

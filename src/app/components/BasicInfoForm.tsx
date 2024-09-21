@@ -58,7 +58,7 @@ const BasicInfoForm = forwardRef((props, ref) => {
         </p>
         <div className="flex items-center gap-x-2 mt-4 mb-6">
           {socialIcons.map((icon, index) => (
-            <div key={index} className="py-3 px-10 rounded-xl bg-gray-100">
+            <div key={index} className="flex justify-center flex-1 py-3 px-10 rounded-xl bg-gray-100">
               <Image src={icon} alt="social icons" width={20} height={20} />
             </div>
           ))}

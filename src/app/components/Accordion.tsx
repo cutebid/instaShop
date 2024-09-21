@@ -10,7 +10,7 @@ interface AccordionProps {
 
 const Accordion: React.FC<AccordionProps> = ({ title, isOpen, onClick, children }) => {
   return (
-    <div className="border-y border-gray-200 pt-6 pb-4 px-4">
+    <div className="border-y border-gray-200 pt-6 pb-4 px-4 ">
       <div
         className="flex justify-between items-center cursor-pointer"
         onClick={onClick}
