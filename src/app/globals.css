@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground:  #000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #000;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.input::placeholder{
+  font-size: 14px;
+  color: black;
+  opacity: 0.6;
+}
+
+.input:focus, .input:hover{
+  border: 1px solid #8A226F
+}
+
+.btnShadow{
+  box-shadow: 4px 8px 24px 0px #FE2C5533;
+}
