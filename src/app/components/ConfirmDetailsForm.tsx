@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from "react";
+import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import avatar from "../public/avatar.png";
 import CustomInput from "./CustomInput";
 import Image from "next/image";
@@ -17,6 +17,8 @@ export interface apiSignInDataType {
 
 const ConfirmDetailsForm = forwardRef((props, ref) => {
   const dispatch = useAppDispatch();
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = async (values: apiSignInDataType) => {
     dispatch(setConfirmDetails(values));
@@ -39,7 +41,7 @@ const ConfirmDetailsForm = forwardRef((props, ref) => {
         storeEmail: Yup.string()
           .required("Store email is required")
           .email("Invalid email"),
-        category: Yup.string().required("username is required"),
+        category: Yup.string().required("Category is required"),
       }),
       onSubmit,
     });
@@ -51,18 +53,48 @@ const ConfirmDetailsForm = forwardRef((props, ref) => {
     },
   }));
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const triggerFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
     <div>
-      <div className="border border-gray-200 rounded-xl px-1 py-4 flex flex-col justify-center items-center mt-5 cursor-pointer">
+      <div
+        className="border border-gray-200 rounded-xl px-1 py-4 flex flex-col justify-center items-center mt-5 cursor-pointer"
+        onClick={triggerFileInput}
+      >
         <Image
-          src={avatar}
-          alt="social icons"
+          src={imagePreview || avatar} 
+          alt="store logo"
           width={80}
           height={80}
-          className="object-cover"
+          className="w-20 h-20 object-cover rounded-full"
         />
         <p className="text-xs text-gray-400 mt-2">Upload store logo</p>
       </div>
+
+      {/* Hidden file input */}
+      <input
+        type="file"
+        ref={fileInputRef} 
+        accept="image/*" 
+        style={{ display: "none" }}
+        onChange={handleFileChange} 
+      />
+
       <div className="mt-3">
         <form onSubmit={handleSubmit}>
           <CustomInput

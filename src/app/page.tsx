@@ -62,6 +62,7 @@ export default function Home() {
         <CustomeButton
           btnTitle="Get started"
           onClick={() => router.push("/getStarted")}
+          className=" animate-pulse ease-in"
         />
       </div>
     </div>
