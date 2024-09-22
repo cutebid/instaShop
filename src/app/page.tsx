@@ -14,7 +14,7 @@ export default function Home() {
     "Boost Your Visibility",
   ];
   return (
-    <div className="px-8 pt-12 pb-10 h-screen  ">
+    <div className="px-8 pt-12 pb-10 h-full">
       <div className="">
         <div className="flex justify-center items-center">
         <Image
