@@ -57,7 +57,7 @@ const Page = () => {
         {step === 2 && <BasicInfoForm ref={basicInfoFormRef} />}
         {step === 3 && <ConfirmDetailsForm ref={confirmDetailsFormRef} />}
       </div>
-      <div className=" mt-32 ">
+      <div className=" mt-28 ">
         <CustomeButton
           btnTitle="Continue"
           onClick={handleSteps}
