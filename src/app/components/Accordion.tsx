@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { GoChevronDown } from "react-icons/go";
 
@@ -18,12 +19,20 @@ const Accordion: React.FC<AccordionProps> = ({ title, isOpen, onClick, children 
         <h3 className="font-medium text-sm">{title}</h3>
         <div> <GoChevronDown size={24} color="gray" /></div>
       </div>
-      {isOpen && (
-        <div className="mt-4">
+      
+        <AnimatePresence>
+        {isOpen && (
+        <motion.div initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 10}}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.6 }} className="mt-4">
           {children}
-        </div>
+        </motion.div>
       )}
-    </div>
+        </AnimatePresence>
+      </div>
+     
+    
   );
 };
 

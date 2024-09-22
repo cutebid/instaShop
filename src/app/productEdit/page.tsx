@@ -206,4 +206,4 @@ const ProductEdit: React.FC = () => {
 
 ProductEdit.displayName = "ProductEdit";
 
-export default withAuth(ProductEdit);
+export default (ProductEdit);
