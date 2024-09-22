@@ -40,7 +40,7 @@ const Page = () => {
   };
 
   return (
-    <div className="px-5 pb-10 flex flex-col h-screen  overflow-y-auto">
+    <div className="px-5 pb-20 flex flex-col h-screen  overflow-y-auto">
       <Header title="Get Started" />
       <div className="flex-1">
         <div className="grid grid-cols-3 gap-x-2">
