@@ -1,5 +1,7 @@
 import { ChangeEventHandler, FocusEventHandler } from "react";
 import classNames from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
+import { notificationVariant } from "../utils/helpers";
 
 interface Props {
   errorMessage?: string;
@@ -14,7 +16,6 @@ interface Props {
   type?: string;
   label?: string;
   width?: string;
-
 }
 
 const CustomInput = ({
@@ -60,9 +61,20 @@ const CustomInput = ({
         style={{ width: width || "100%" }}
         {...props}
       />
-      {errorVisible && errorMessage && (
-        <span className="text-red-500 text-sm">{errorMessage}</span>
-      )}
+
+      <AnimatePresence>
+        {errorVisible && errorMessage && (
+          <motion.div
+            variants={notificationVariant}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="text-red-500 text-xs mb-2"
+          >
+            {errorMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

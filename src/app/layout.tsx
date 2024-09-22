@@ -6,6 +6,7 @@ import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
 
+
 const dmSans = DM_Sans({
   display: "swap",
   subsets: ["latin"],
@@ -13,13 +14,15 @@ const dmSans = DM_Sans({
   style: ["normal", "italic"],
 });
 
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
+
+
   return (
     <html lang="en">
       <head>

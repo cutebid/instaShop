@@ -22,14 +22,14 @@ const CustomeButton: React.FC<ButtonProps> = ({
   shadow = true,
 }) => {
   const btnClasses = classNames(
-    `bg-primary  font-medium text-sm p-[10px] rounded-[90px] ${
+    `bg-primary font-medium text-sm p-[10px] rounded-[90px] hover:scale-110 ${
       shadow && "btnShadow"
     } `,
     className
   );
 
   return (
-    <div>
+    <div className=" hover:sca">
       <button
         className={btnClasses}
         style={{ width: width || "100%" , color: color || 'white'}}

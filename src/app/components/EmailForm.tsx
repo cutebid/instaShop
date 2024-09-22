@@ -9,12 +9,11 @@ export interface apiSignInDataType {
   email: string;
 }
 
-// Use forwardRef to expose the form submission method
+// forwardRef to expose the form submission method
 const EmailForm = forwardRef((props, ref) => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (values: apiSignInDataType) => {
-    console.log(values);  // Log form values upon submission
     dispatch(setEmail(values.email))
   };
 
@@ -31,12 +30,12 @@ const EmailForm = forwardRef((props, ref) => {
     },
     validateOnChange: true,
     validationSchema: Yup.object().shape({
-      email: Yup.string().required().email().label('Email'),
+      email: Yup.string().required("email is required").email("Invalid email"),
     }),
     onSubmit,
   });
 
-  // Expose form submission method to parent
+ 
   useImperativeHandle(ref, () => ({
     submitForm() {
       handleSubmit(); // Trigger formik's handleSubmit

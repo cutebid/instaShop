@@ -1,9 +1,19 @@
-const withPWA = require('next-pwa')({
-    dest: 'public', // Output the service worker in the public directory
-    register: true,
-    skipWaiting: true,
-  });
-  
-  module.exports = withPWA({
-    // Your Next.js config goes here
-  });
+/** @type {import('next').NextConfig} */
+
+const withPWA = require("@ducanh2912/next-pwa").default({
+  dest: "public",
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  swcMinify: true,
+  disable: false,
+  workboxOptions:{
+    disableDevLogs: true
+  }
+
+});
+
+const nextConfig = {};
+
+module.exports = withPWA(nextConfig);
+

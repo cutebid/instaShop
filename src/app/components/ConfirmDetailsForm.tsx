@@ -12,15 +12,13 @@ export interface apiSignInDataType {
   storeTag: string;
   storePhone: string;
   storeEmail: string;
+  category: string;
 }
 
 const ConfirmDetailsForm = forwardRef((props, ref) => {
   const dispatch = useAppDispatch();
 
-  const onSubmit = async (
-    values: apiSignInDataType
-  ) => {
-    console.log(values); // Log form values upon submission
+  const onSubmit = async (values: apiSignInDataType) => {
     dispatch(setConfirmDetails(values));
   };
 
@@ -31,13 +29,17 @@ const ConfirmDetailsForm = forwardRef((props, ref) => {
         storeTag: "",
         storePhone: "",
         storeEmail: "",
+        category: "",
       },
       validateOnChange: true,
       validationSchema: Yup.object().shape({
         storeName: Yup.string().required("Store name is required"),
         storeTag: Yup.string().required("Store tag is required"),
         storePhone: Yup.string().required("Store phone is required"),
-        storeEmail: Yup.string().required("Store email is required").email("Invalid email"),
+        storeEmail: Yup.string()
+          .required("Store email is required")
+          .email("Invalid email"),
+        category: Yup.string().required("username is required"),
       }),
       onSubmit,
     });
@@ -45,7 +47,7 @@ const ConfirmDetailsForm = forwardRef((props, ref) => {
   // Expose form submission method to parent
   useImperativeHandle(ref, () => ({
     submitForm() {
-      handleSubmit(); // Trigger formik's handleSubmit
+      handleSubmit();
     },
   }));
 
@@ -96,12 +98,19 @@ const ConfirmDetailsForm = forwardRef((props, ref) => {
             onBlur={handleBlur("storeEmail")}
             value={values.storeEmail}
           />
-          <CustomInput placeholder="Category" />
+          <CustomInput
+            placeholder="Category"
+            onChange={handleChange("category")}
+            errorVisible={touched["category"]}
+            errorMessage={errors["category"]}
+            onBlur={handleBlur("category")}
+            value={values.category}
+          />
         </form>
       </div>
     </div>
   );
 });
 
-ConfirmDetailsForm.displayName = 'confirmDetailsForm'
+ConfirmDetailsForm.displayName = "confirmDetailsForm";
 export default ConfirmDetailsForm;

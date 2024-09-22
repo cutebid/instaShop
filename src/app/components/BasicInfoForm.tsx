@@ -24,7 +24,6 @@ const BasicInfoForm = forwardRef((props, ref) => {
   const onSubmit = async (
     values: apiSignInDataType,
   ) => {
-    console.log(values); // Log form values upon submission
     dispatch(setBasicInfo(values));
   };
 
@@ -34,16 +33,18 @@ const BasicInfoForm = forwardRef((props, ref) => {
         fullName: "",
         userName: "",
         phoneNumber: "",
-        email: ""
+        email: "",
       },
       validateOnChange: true,
       validationSchema: Yup.object().shape({
-        email: Yup.string().required().email().label("Email"),
+        fullName: Yup.string().required("full name is required"),
+        userName: Yup.string().required("username is required"),
+        phoneNumber: Yup.string().required(" phone number is required"),
+        email: Yup.string().required("Store email is required").email("Invalid email"),
       }),
       onSubmit,
     });
 
-  // Expose form submission method to parent
   useImperativeHandle(ref, () => ({
     submitForm() {
       handleSubmit(); // Trigger formik's handleSubmit
