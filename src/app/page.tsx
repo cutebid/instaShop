@@ -15,7 +15,7 @@ export default function Home() {
   ];
   return (
     <div className="px-8 pt-12 pb-6 flex flex-col min-h-screen">
-      <div className="flex-1">
+      <div className="">
         <div className="flex justify-center items-center">
         <Image
           src={shoppingImage}
