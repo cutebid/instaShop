@@ -15,8 +15,6 @@ interface FormRef {
 
 const Page = () => {
   const [step, setStep] = useState(1);
-  
-  // Use the FormRef type for useRef instead of any
   const emailFormRef = useRef<FormRef | null>(null);
   const basicInfoFormRef = useRef<FormRef | null>(null);
   const confirmDetailsFormRef = useRef<FormRef | null>(null);
@@ -43,7 +41,7 @@ const Page = () => {
   };
 
   return (
-    <div className="px-5 pb-10 flex flex-col h-screen">
+    <div className="px-5 mb-20 pb-10 flex flex-col h-screen">
       <Header title="Get Started" />
       <div className="flex-1">
         <div className="grid grid-cols-3 gap-x-2">
