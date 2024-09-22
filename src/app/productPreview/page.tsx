@@ -23,11 +23,10 @@ const ProductPreview = () => {
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
   };
-  // Original long text
+ 
   const fullText =
     "Wholesale and drop shipping are both welcomed. For wholesale, we will offer discount or free express shipping which only takes 3-7 days to arrive. For drop shipping, we could send the goods to your customers directly and won't leave information about us if you'd like to. How can track my parcel? You can track your parcel on the following website using your tracking number: www.17track.net/en (Copied to the browser to open). What can I do when purchase protection time is running out? If your purchase protection time is running out, please contact us and we can help you to extend it. So your money will not go to my account.";
 
-  // Specify how many characters to show before truncating
   const maxLength = 150;
 
   const comments = [
@@ -40,7 +39,7 @@ const ProductPreview = () => {
   ];
 
   return (
-    <div className="pb-10 h-screen">
+    <div className="pb-8">
       <div className="px-4">
         <Header title="Product preview" verticalLine />
       </div>
@@ -56,11 +55,11 @@ const ProductPreview = () => {
         </div>
 
         <div className="px-4 mt-4">
-          <div className="flex">
-            <p className="text-sm font-medium">
+          <div className="flex justify-between">
+            <p className="text-sm font-medium w-4/5 ">
               Gucci bag – the epitome of luxury and sophistication
             </p>
-            <div className="flex items-center gap-x-1">
+            <div className="flex items-center gap-x-1 ">
               <span className="bg-gray-100 h-9 w-9 rounded-full flex items-center justify-center">
                 <IoArrowRedoOutline size={20} color="gray" />
               </span>
@@ -197,7 +196,7 @@ const ProductPreview = () => {
               {comments.map((comment, index) => (
                 <div
                   key={index}
-                  className="bg-gray-100 py-1 px-2 rounded-[90px] text-black text-xs cursor-pointer "
+                  className="bg-gray-100 py-1 px-2 rounded-[90px] text-black text-xs cursor-pointer flex justify-center "
                 >
                   {comment}
                 </div>
@@ -205,7 +204,7 @@ const ProductPreview = () => {
             </div>
           </div>
         </Accordion>
-        <div className="mt-4 px-4">
+        <div className="mt-5 px-4">
           <CustomButton btnTitle="Publish" onClick={() => router.push("/")} />
         </div>
       </div>

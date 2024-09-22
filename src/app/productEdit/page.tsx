@@ -17,7 +17,7 @@ import Switch from "react-switch";
 
 
 const ProductEdit: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [showVariation, setShowVariation] = useState<boolean>(false);
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [checkedStates, setCheckedStates] = useState<boolean[]>([]);
@@ -52,7 +52,7 @@ const ProductEdit: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen pb-10">
+    <div className={` ${openIndex == 0 || (openIndex == 1 && selectedImages.length > 1) || (openIndex == 2 && showVariation)? 'h-full pb-8' : 'h-screen flex flex-col pb-8'}`}>
       <div className="px-4">
         <Header title="Create a product" verticalLine />
         <div className="flex justify-between text-xs mb-2">
@@ -96,20 +96,25 @@ const ProductEdit: React.FC = () => {
             {selectedImages.length > 0 && (
               <div className="mt-4 ">
                 {selectedImages.map((image, index) => (
-                  <div key={index} className="relative flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-x-2 w-3/5 ">
-                      <img
+                  <div key={index} className="flex items-center  mb-4">
+                    <div className="flex items-center gap-x-2 flex-1  ">
+                      <div className="w-[60px]">
+                      <Image
                         src={URL.createObjectURL(image)}
+                        width={60}
+                        height={60}
                         alt={`Selected image ${index + 1}`}
-                        className="w-[60px] h-[60px] rounded-lg object-cover"
+                        className="w-full h-[60px] rounded-lg object-cover"
                       />
-                      <p className="text-sm">{image.name}</p>
+                      </div>
+                     
+                      <p  className="text-sm w-1/2">{image.name}</p>
                     </div>
                     <div className="flex items-center gap-x-3  ">
                       <IoEllipsisHorizontalSharp  size={16} color="gray" />
                       <Switch
                       onChange={() => handleChange(index)}
-                      checked={checkedStates[index] || false} // Check the state for each switch
+                      checked={checkedStates[index] || true} // Check the state for each switch
                       onColor="#8A226F"
                       uncheckedIcon={false}
                       checkedIcon={false}
@@ -181,7 +186,7 @@ const ProductEdit: React.FC = () => {
           </div>
         </Accordion>
       </div>
-      <div className="flex item-center gap-x-2 px-4 ">
+      <div className={`flex item-center gap-x-2 px-4 ${openIndex == 0 && 'mt-6'}`}>
         <div className="flex-1">
           <CustomeButton
             shadow={false}
