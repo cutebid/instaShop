@@ -14,8 +14,8 @@ export default function Home() {
     "Boost Your Visibility",
   ];
   return (
-    <div className="px-8 pt-12 pb-10 h-full">
-      <div className="">
+    <div className="px-8 pt-12 pb-6 flex flex-col min-h-screen">
+      <div className="flex-1">
         <div className="flex justify-center items-center">
         <Image
           src={shoppingImage}
@@ -39,7 +39,7 @@ export default function Home() {
           </ul>
         </div>
       </div>
-      <div className="mt-36">
+      <div className="mt-auto">
       <CustomeButton btnTitle="Get started" onClick={() => router.push('/getStarted')} />
       </div>
       
