@@ -21,7 +21,7 @@ export default function Home() {
   };
 
   return (
-    <div className="px-8 pt-16 pb-20 flex flex-col h-screen">
+    <div className="px-8 pt-16 pb-20 flex flex-col  overscroll-y-auto ">
       <div className="flex-1">
         <div className="flex justify-center items-center">
           <Image
@@ -58,7 +58,7 @@ export default function Home() {
           </motion.ul>
         </div>
       </div>
-      <div>
+      <div className="mt-24">
         <CustomeButton
           btnTitle="Get started"
           onClick={() => router.push("/getStarted")}
