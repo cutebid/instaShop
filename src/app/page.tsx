@@ -13,22 +13,23 @@ export default function Home() {
     "Secure and Fast Payments",
     "Boost Your Visibility",
   ];
+  
   return (
-    <div className="px-8 pt-12 pb-10  ">
+    <div className="flex flex-col min-h-screen px-8 pt-12 pb-8">
       <div className="flex-1">
         <div className="flex justify-center items-center">
-        <Image
-          src={shoppingImage}
-          alt="shopping image"
-          width={296}
-          height={210}
-          className="object-cover"
-        />
+          <Image
+            src={shoppingImage}
+            alt="shopping image"
+            width={296}
+            height={210}
+            className="object-cover"
+          />
         </div>
         <div className="text-center mt-6 ">
           <h1 className="text-4xl font-bold">Welcome</h1>
           <p className="text-sm mt-2">
-            The safest platfrom to shop from social media vendors
+            The safest platform to shop from social media vendors
           </p>
           <ul className="py-3 px-4 border-[0.5px] border-primary bg-light_pink rounded-xl mt-5">
             {features.map((feature, index) => (
@@ -39,10 +40,15 @@ export default function Home() {
           </ul>
         </div>
       </div>
-      <div className="mt-24">
-      <CustomeButton btnTitle="Get started" onClick={() => router.push('/getStarted')} />
-      </div>
       
+      {/* Button Section */}
+      <div className="mt-auto">
+        <CustomeButton 
+          btnTitle="Get started" 
+          onClick={() => router.push('/getStarted')} 
+        />
+      </div>
     </div>
   );
 }
+
