@@ -39,7 +39,7 @@ export default function Home() {
           </ul>
         </div>
       </div>
-      <div className="mt-32">
+      <div className="mt-36">
       <CustomeButton btnTitle="Get started" onClick={() => router.push('/getStarted')} />
       </div>
       
